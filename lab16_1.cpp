@@ -32,3 +32,50 @@ int main(){
 	findColSum(dPtr,sum2,N,M); 
 	showData(sum2,1,M);
 }
+void showData(double *Hen,int N ,int M){
+    cout << fixed << setprecision(2);
+    for(int i = 0; i < N*M; i++){
+        cout << *(Hen+i);
+        if(i%M == M-1) cout << endl;
+        else cout << " ";
+    }
+}
+void randData(double *Hen,int N,int M){
+    for(int i = 0; i < N*M; i++){
+        *(Hen+i) = (rand()%101)/100.0;
+    }
+}
+void findRowSum(const double *Hen,double *Tai,int N,int M){
+	int n = 0;
+	for (int j = 0; j < M ; j++) *(Tai+j) = 0;
+	if (M == 1) {
+    	for (int i  = 0; i < M*N; i++) *(Tai+i) = *(Hen+i);
+    	}
+	else{
+		for (int i  = 0; i < M*N; i++){
+			*(Tai+n) += *(Hen+i);
+			if((i+1)%M == 0){
+		    	n++;
+        	}
+		}
+	}
+}
+void findColSum(const double *Hen,double *Tai,int N,int M){
+	if(N == 1){
+		for (int i  = 0; i < M; i++){
+			*(Tai+i) = *(Hen+i);
+		}
+	}
+	else{
+		for (int i  = 0; i < M*N; i++){
+			*(Tai+i%M) += *(Hen+i);
+		}
+        for (int j = 0; j < M ; j++){
+             *(Tai+j) = 0;
+        }
+	    for (int k  = 0; k < M*N; k++){
+		    *(Tai+k%M) += *(Hen+k);  
+        }
+    }
+} 
+
